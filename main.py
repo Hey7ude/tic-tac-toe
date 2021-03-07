@@ -4,6 +4,9 @@ from models import Player, Game
 
 def start_game_commandline(game):
     elements = game.elements
+    players = game.players
+    if len(players) != game.player_count:
+        return print('not enough players')
     flag = 0
     for turn in range(game.demension * game.demension):
         print(f'{game.players[0].get_color()}: x     {game.players[1].get_color()}: o')
@@ -15,17 +18,17 @@ def start_game_commandline(game):
             print(test)
             print('----------')
         if flag == 0:
-            a = input(f'{game.players[0].get_color()} turn:')
-            game.elements[int(a[0])][int(a[1])] = 'x'
+            given_position = input(f'{game.players[0].get_color()} turn:')
+            game.elements[int(given_position[0])][int(given_position[1])] = 'x'
             flag = 1
         else:
-            a = input(f'{game.players[1].get_color()} turn:')
-            game.elements[int(a[0])][int(a[1])] = 'o'
+            given_position = input(f'{game.players[1].get_color()} turn:')
+            game.elements[int(given_position[0])][int(given_position[1])] = 'o'
             flag = 0
 
-        if game.win_check(a):
-            print(f'{elements[int(a[0])][int(a[1])]} won')
-
+        if game.win_check(given_position):
+            return print((f'{elements[int(given_position[0])][int(given_position[1])]} won'))
+    return print('Tie!')
 
 
 
@@ -35,8 +38,8 @@ def start_game_gui(game):
 
 
     window = tk.Tk()
-    for i in range(3):
-        for j in range(3):
+    for i in range(game.demension):
+        for j in range(game.demension):
             frame = tk.Frame(master=window, relief = tk.RAISED, borderwidth=5)
             frame.grid(row=i, column=j)
             label = tk.Label(master=frame, text=f'{game.elements[i][j]}')

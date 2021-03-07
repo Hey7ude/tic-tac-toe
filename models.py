@@ -72,6 +72,9 @@ class Game:
                 for item in range(len(win_patt[pattern])):
                     b = str(win_patt[pattern][item])
                     if self.elements[int(current_pos[0])][int(current_pos[1])] != self.elements[int(b[0])][int(b[1])]:
-                        return False
-                return True
+                        flag = 0
+                        break
+                    flag = 1
+                if flag == 1:
+                    return True
         return False
