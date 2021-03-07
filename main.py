@@ -10,13 +10,7 @@ def start_game_commandline(game):
     flag = 0
     for turn in range(game.demension * game.demension):
         print(f'{game.players[0].get_color()}: x     {game.players[1].get_color()}: o')
-        print('----------')
-        for row in range(game.demension):
-            test = '| '
-            for col in range(game.demension):
-                test = test + f'{game.elements[row][col]} | '
-            print(test)
-            print('----------')
+        game.show_board()
         if flag == 0:
             given_position = input(f'{game.players[0].get_color()} turn:')
             game.elements[int(given_position[0])][int(given_position[1])] = 'x'

@@ -78,3 +78,12 @@ class Game:
                 if flag == 1:
                     return True
         return False
+
+    def show_board(self):
+        print('--------------------')
+        for row in range(self.demension):
+            a = '|'
+            for column in range(self.demension):
+                a = a + f' {self.elements[row][column]} |'
+            print(a)
+            print('--------------------')

@@ -1,6 +1,6 @@
 # TicTacToe
 Tic-tac-toe game. thats it :)
-## How it works:
+## How it works
 
-## TODO:
+## TODO
 - [ ] simple GUI 
