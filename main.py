@@ -1,41 +1,9 @@
 from models import Player, Game
         
 
-def win_pattern(demension=int, win_on=int):
-    a = []
-    for i in range(demension):
-        for j in range(demension):
-            if i+win_on <= demension:
-                b = []
-                for k in range(win_on):
-                    b.append(f'{i+k}*{j}')
-                a.append(b)
-            if j+win_on <= demension:
-                b = []
-                for k in range(win_on):
-                    b.append(f'{i}*{j+k}')
-                a.append(b)
-            if i+win_on <= demension:
-                if j+win_on <= demension:
-                    b = []
-                    for k in range(win_on):
-                        b.append(f'{i+k}*{j+k}')                
-                    a.append(b)
-                if j+1-win_on >=0:
-                    b = []
-                    for k in range(win_on):
-                        b.append(f'{i+k}*{j-k}')
-                    a.append(b)
-    return a    
-
 
 def start_game_commandline(game):
     elements = game.elements
-    # elements = [['o', 'x', 'x'], ['o', 'x', 'o'], ['x', 'x', 'x']]
-    win_pattern = []
-
-
-
     flag = 0
     for turn in range(game.demension * game.demension):
         print(f'{game.players[0].get_color()}: x     {game.players[1].get_color()}: o')
@@ -55,16 +23,9 @@ def start_game_commandline(game):
             game.elements[int(a[0])][int(a[1])] = 'o'
             flag = 0
 
-    for i in range(3):
-        if elements[i][0] == elements[i][1] and elements[i][0] == elements[i][2]:
-            print(f'{elements[i][0]} won')
-        if elements[0][i] == elements[1][i] and elements[0][i] == elements[2][i]:
-                print(f'{elements[0][i]} won')
-    if elements[0][0] == elements[1][1] and elements[0][0] == [elements][2][2]:
-        print(f'{elements[0][0]} won')
-    if elements[0][2] == elements[1][1] and elements[1][1] == elements[2][0]:
-        print(f'{elements[1][1]} won')
-            
+        if game.win_check(a):
+            print(f'{elements[int(a[0])][int(a[1])]} won')
+
 
 
 
