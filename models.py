@@ -13,11 +13,14 @@ class Player:
         self.id = id
         self.color = color
 
+
     def get_color(self):
         return self.color
 
+
     def __str__(self):
         return str(self.id)    
+
 
 class Game:
     def __init__(self, demension, win_on, player_count):
@@ -27,14 +30,18 @@ class Game:
         self.players = []
         self.elements = create_elements(demension, demension)
 
+
     def __str__(self):
         return f'demension:{self.demension}*{self.demension}, win on:{self.win_on}, player count:{self.player_count}'
-    
+
+
     def add_player(self, player):
         self.players.append(player)
 
+
     def get_players(self):
         return self.players
+
 
     def get_win_pattern(self):
         pattern_list = []
@@ -64,7 +71,6 @@ class Game:
         return pattern_list   
 
 
-
     def win_check(self, current_pos):
         win_patt = self.get_win_pattern()
         for pattern in range(len(win_patt)):
@@ -78,6 +84,7 @@ class Game:
                 if flag == 1:
                     return True
         return False
+
 
     def show_board(self):
         print('--------------------')
