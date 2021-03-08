@@ -1,12 +1,4 @@
 
-def create_elements(row, column):
-    a = []
-    for i in range(row):
-        a.append([])
-        for j in range(column):
-            a[i].append(None)
-    return a
-
 
 class Player:
     def __init__(self, color, id):
@@ -28,11 +20,19 @@ class Game:
         self.win_on = win_on
         self.player_count = player_count
         self.players = []
-        self.elements = create_elements(demension, demension)
+        self.elements = self.create_elements(demension, demension)
 
 
     def __str__(self):
         return f'demension:{self.demension}*{self.demension}, win on:{self.win_on}, player count:{self.player_count}'
+
+    def create_elements(self, row, column):
+        a = []
+        for i in range(row):
+            a.append([])
+            for j in range(column):
+                a[i].append(None)
+        return a
 
 
     def add_player(self, player):
