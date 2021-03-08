@@ -5,3 +5,5 @@ Tic-tac-toe game. thats it :)
 
 ## TODO
 - [ ] simple GUI 
+- [ ] show errors instead of crash
+- [ ] more feature for player and game classes
