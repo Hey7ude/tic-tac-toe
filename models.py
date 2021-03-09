@@ -94,3 +94,36 @@ class Game:
                 a = a + f' {self.elements[row][column]} |'
             print(a)
             print('--------------------')
+
+
+    def start_game(self):
+        if len(self.players) != self.player_count:
+            return print('not enough players')
+        flag = 0
+        for turn in range(self.demension * self.demension):
+            print(flag)
+            print(self.player_count)
+            print(f'{self.players[0].get_color()}: x     {self.players[1].get_color()}: o')
+            self.show_board()
+            given_position = input(f'{self.players[flag].get_color()} turn:')
+            self.elements[int(given_position[0])][int(given_position[1])] = flag
+            flag += 1
+            if flag == self.player_count:
+                flag = 0
+            if self.win_check(given_position):
+                self.show_board()
+                return print((f'{elements[int(given_position[0])][int(given_position[1])]} won'))
+        return print('Tie!')
+
+        
+    def start_game_gui(self):
+        import tkinter as tk
+
+        window = tk.Tk()
+        for i in range(self.demension):
+            for j in range(self.demension):
+                frame = tk.Frame(master=window, relief = tk.RAISED, borderwidth=5)
+                frame.grid(row=i, column=j)
+                label = tk.Label(master=frame, text=f'{self.elements[i][j]}')
+                label.pack()
+        window.mainloop()
