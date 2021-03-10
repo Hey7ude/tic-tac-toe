@@ -1,9 +1,11 @@
 
 
 class Player:
+    total = 0
+    
     def __init__(self, color, id):
-        self.id = id
         self.color = color
+        Player.total += 1
 
 
     def get_color(self):
@@ -15,12 +17,14 @@ class Player:
 
 
 class Game:
+    total = 0
     def __init__(self, demension, win_on, player_count):
         self.demension = demension
         self.win_on = win_on
         self.player_count = player_count
         self.players = []
         self.elements = self.create_elements(demension, demension)
+        Game.total += 1
 
 
     def __str__(self):
@@ -33,6 +37,24 @@ class Game:
             for j in range(column):
                 a[i].append(None)
         return a
+
+
+    def make_id(self, given_list):
+        flag = 0
+        if len(given_list) == 0:
+            self.id = 0
+            return self.id
+        
+        for i in range(Game.total):
+            for j in range(len(given_list)):
+                if given_list[j].id == i:
+                    flag = 1
+                    break
+            if flag == 1:
+                self.id = i+1
+                return self.id
+            self.id = i
+            return self.id
 
 
     def add_player(self, player):
