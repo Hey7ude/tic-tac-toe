@@ -121,16 +121,16 @@ class Game:
         for turn in range(self.demension * self.demension):
             print(flag)
             print(self.player_count)
-            print(f'{self.players[0].get_color()}: x     {self.players[1].get_color()}: o')
+            print(f'{self.players[0]}: x     {self.players[1]}: o')
             self.show_board()
-            given_position = input(f'{self.players[flag].get_color()} turn:')
+            given_position = input(f'{self.players[flag]} turn:')
             self.elements[int(given_position[0])][int(given_position[1])] = flag
             flag += 1
             if flag == self.player_count:
                 flag = 0
             if self.win_check(given_position):
                 self.show_board()
-                return print((f'{elements[int(given_position[0])][int(given_position[1])]} won'))
+                return print((f'{self.elements[int(given_position[0])][int(given_position[1])]} won'))
         return print('Tie!')
 
         
