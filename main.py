@@ -2,26 +2,39 @@ from models import Player, Game
 
 
 
-games = []
+def input_to_int(text):
+    while True:
+        try:
+            return int(input(text))
+        except:
+            print('Incorrect command!!!')
+            
+
+
 while True:
-    command = int(input('1-make a game\n2-add player\n3-show games\n'))
+    command = input_to_int('1-make a game\n2-show games\nenter 0 for exit\n')
+    if command == 0:
+        break
     if command == 1:
-        demension = int(input('Enter demension:'))
-        win_on = int(input('Enter win on:'))
-        player_count = int(input('Enter number of players:'))
+        demension = input_to_int('Enter demension:')
+        win_on = input_to_int('Enter win on:')
+        player_count = input_to_int('Enter number of players:')
         game = Game(demension, win_on, player_count)
-        game.make_id(games)
-        games.append(game)
         while True:
-            command = int(input('1-start game\n2-add player\n'))
+            command = input_to_int('1-start game\n2-add player\nenter 0 to go back\n')
+            if command == 0:
+                break
             if command == 1:
                 game.start_game()
             if command == 2:
                 name = input('Enter name of player:\n')
                 player = Player(name)
                 game.add_player(player)
-    if command == 3:
-        for game in games:
+            else:
+                print('Incorrect command!!!')
+    if command == 2:
+        for game in Game.objects:
             print(game)
-    if command == 4:
-        pass
+    else:
+        print('Incorrect command!!!')
+
