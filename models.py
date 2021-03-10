@@ -3,17 +3,13 @@
 class Player:
     total = 0
     
-    def __init__(self, color, id):
-        self.color = color
+    def __init__(self, name):
+        self.name = name
         Player.total += 1
 
 
-    def get_color(self):
-        return self.color
-
-
     def __str__(self):
-        return str(self.id)    
+        return self.name
 
 
 class Game:
