@@ -13,14 +13,15 @@ class Player:
 
 
 class Game:
-    total = 0
+    objects = []
     def __init__(self, demension, win_on, player_count):
+        self.id = self.create_id()
         self.demension = demension
         self.win_on = win_on
         self.player_count = player_count
         self.players = []
         self.elements = self.create_elements(demension, demension)
-        Game.total += 1
+        self.objects.append(self)
 
 
     def __str__(self):
@@ -35,30 +36,26 @@ class Game:
         return a
 
 
-    def make_id(self, given_list):
+    def create_id(self):
         flag = 0
-        if len(given_list) == 0:
-            self.id = 0
-            return self.id
+        if len(Game.objects) == 0:
+            return 0
         
-        for i in range(Game.total):
-            for j in range(len(given_list)):
-                if given_list[j].id == i:
+        for i in range(len(Game.objects)):
+            for game in Game.objects:
+                if game.id == i:
                     flag = 1
                     break
-            if flag == 1:
-                self.id = i+1
-                return self.id
-            self.id = i
-            return self.id
+            if flag == 0:
+                return i
+            if i+1 == len(Game.objects):
+                return i+1
+        
 
 
     def add_player(self, player):
         self.players.append(player)
-
-
-    def get_players(self):
-        return self.players
+        
 
 
     def get_win_pattern(self):
