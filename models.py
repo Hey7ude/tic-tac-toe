@@ -40,7 +40,7 @@ class Player:
 class Game:
 
     objects = []
-    
+
     def __init__(self, demension, win_on, player_count):
         self.id = create_id(Game)
         self.demension = demension
@@ -130,12 +130,13 @@ class Game:
             self.show_board()
             given_position = input(f'{self.players[flag]} turn:')
             self.elements[int(given_position[0])][int(given_position[1])] = flag
+            if self.win_check(given_position):
+                self.show_board()
+                print((f'{self.elements[int(given_position[0])][int(given_position[1])]} won'))
+                return self.players[flag]
             flag += 1
             if flag == self.player_count:
                 flag = 0
-            if self.win_check(given_position):
-                self.show_board()
-                return print((f'{self.elements[int(given_position[0])][int(given_position[1])]} won'))
         return print('Tie!')
 
         
