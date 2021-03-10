@@ -119,8 +119,6 @@ class Game:
             return print('not enough players')
         flag = 0
         for turn in range(self.demension * self.demension):
-            print(flag)
-            print(self.player_count)
             print(f'{self.players[0]}: x     {self.players[1]}: o')
             self.show_board()
             given_position = input(f'{self.players[flag]} turn:')
