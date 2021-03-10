@@ -1,11 +1,36 @@
 
 
-class Player:
-    total = 0
+def create_id(model):
+
+    flag = 0
+
+    if len(model.objects) == 0:
+        return 0
     
+    for i in range(len(model.objects)):
+        for obj in model.objects:
+            if obj.id == i:
+                flag = 1
+                break
+        if flag == 0:
+            return i
+        if i+1 == len(model.objects):
+            return i+1
+
+
+class Player:
+
+    objects = []
+
     def __init__(self, name):
+        self.id = create_id(Player)
         self.name = name
-        Player.total += 1
+        self.score = 0
+        self.objects.append(self)
+    
+
+    def add_score(self):
+        self.score += 1
 
 
     def __str__(self):
@@ -13,9 +38,11 @@ class Player:
 
 
 class Game:
+
     objects = []
+    
     def __init__(self, demension, win_on, player_count):
-        self.id = self.create_id()
+        self.id = create_id(Game)
         self.demension = demension
         self.win_on = win_on
         self.player_count = player_count
@@ -34,28 +61,12 @@ class Game:
             for j in range(column):
                 a[i].append(None)
         return a
-
-
-    def create_id(self):
-        flag = 0
-        if len(Game.objects) == 0:
-            return 0
-        
-        for i in range(len(Game.objects)):
-            for game in Game.objects:
-                if game.id == i:
-                    flag = 1
-                    break
-            if flag == 0:
-                return i
-            if i+1 == len(Game.objects):
-                return i+1
         
 
 
     def add_player(self, player):
         self.players.append(player)
-        
+
 
 
     def get_win_pattern(self):
@@ -116,7 +127,6 @@ class Game:
             return print('not enough players')
         flag = 0
         for turn in range(self.demension * self.demension):
-            print(f'{self.players[0]}: x     {self.players[1]}: o')
             self.show_board()
             given_position = input(f'{self.players[flag]} turn:')
             self.elements[int(given_position[0])][int(given_position[1])] = flag
