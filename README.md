@@ -4,7 +4,7 @@ Tic-tac-toe game. thats it :)
 ## How it works
 First of all run main.py
 For choosing your move in game you should enter row number then column number. Every rows will counted from 0 to demension up to down, columns will counted from 0 to demension left to right. Look at this example below:
-    `
+    ```
     --------------------
     | None | None | None |
     --------------------
@@ -28,7 +28,7 @@ For choosing your move in game you should enter row number then column number. E
     --------------------
     | None | None | None |
     --------------------
-    `
+    ```
 
 ## TODO
 - [ ] simple GUI 
