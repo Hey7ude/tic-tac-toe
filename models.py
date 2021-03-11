@@ -129,7 +129,7 @@ class Game:
         for turn in range(self.demension * self.demension):
             self.show_board()
             given_position = input(f'{self.players[flag]} turn:')
-            self.elements[int(given_position[0])][int(given_position[1])] = flag
+            self.elements[int(given_position[0])][int(given_position[1])] = self.players[flag].name
             if self.win_check(given_position):
                 self.show_board()
                 print((f'{self.elements[int(given_position[0])][int(given_position[1])]} won'))
