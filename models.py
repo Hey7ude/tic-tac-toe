@@ -49,6 +49,7 @@ class Game:
         self.players = []
         self.elements = self.create_elements(demension, demension)
         self.objects.append(self)
+        self.win_pattern = self.get_win_pattern()
 
 
     def __str__(self):
@@ -98,7 +99,7 @@ class Game:
 
 
     def win_check(self, current_pos):
-        win_patt = self.get_win_pattern()
+        win_patt = self.win_pattern
         for pattern in range(len(win_patt)):
             if current_pos in win_patt[pattern]:
                 for item in range(len(win_patt[pattern])):
