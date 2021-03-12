@@ -26,11 +26,12 @@ def make_and_get_object(root, object):
     return entry
 
 
-def clicked(pos, game, buttons):
+def clicked(pos, game, buttons, label):
     game.elements[int(pos[0])][int(pos[1])] = check_turn(game).name
+    label.config(text=f'{who_is_turn(game)} turn:')
     buttons[int(pos[0])][int(pos[1])].configure(text=game.elements[int(pos[0])][int(pos[1])], state='disabled')
     if game.win_check(pos) == True:
-        print(f'{game.elements[int(pos[0])][int(pos[1])]} won')
+        label.config(text=f'{game.elements[int(pos[0])][int(pos[1])]} won')
         lock_all_buttons(buttons)
 
 
@@ -42,14 +43,24 @@ def create_game_start(root, demension, win_on, player_count):
     add_players(game)
     game.players[0].status = True
     top = tk.Toplevel(root)
+    label = tk.Label(top, text=f'{who_is_turn(game)} turn:')
+    label.grid(row=0,column=0)
+    frame = tk.Frame(top)
     for i in range(len(elements)):
         buttons.append([])
         for j in range(len(elements[i])):
-            button = tk.Button(top, relief = tk.RAISED, borderwidth=5, text=f'{elements[i][j]}')
-            button.config(command=lambda current_pos=f'{i}{j}': clicked(current_pos, game, buttons))
+            button = tk.Button(frame, relief = tk.RAISED, borderwidth=5, text=f'{elements[i][j]}')
+            button.config(command=lambda current_pos=f'{i}{j}': clicked(current_pos, game, buttons,label))
             button.grid(row=i,column=j)
             buttons[i].append(button)
+    frame.grid(row=1, column=0)
     top.mainloop()
+
+
+def who_is_turn(game):
+    for player in game.players:
+        if player.status == True:
+            return player
 
 
 def check_turn(game):
