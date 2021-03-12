@@ -65,6 +65,7 @@ class Game:
         return f'demension:{self.demension}*{self.demension}, win on:{self.win_on}, player count:{self.player_count}'
 
     def create_elements(self, row, column):
+    #create game elements
         a = []
         for i in range(row):
             a.append([])
@@ -84,11 +85,13 @@ class Game:
 
 
     def add_player(self, player):
+    #add a player to game
         self.players.append(player)
 
 
 
     def get_win_pattern(self):
+    #returns a list that contains win pattern
         pattern_list = []
         for i in range(self.demension):
             for j in range(self.demension):
@@ -117,6 +120,7 @@ class Game:
 
 
     def win_check(self, current_pos):
+    #check win after current_pos selected. returns True if win
         win_patt = self.win_pattern
         for pattern in range(len(win_patt)):
             if current_pos in win_patt[pattern]:
@@ -132,12 +136,14 @@ class Game:
 
     
     def check_turn(self):
+    #returns which player's turn
         for player in self.players:
             if player.status == True:
                 return player
 
 
     def next_turn(self):
+    #turn off current player and turn on next player
         for i in range(len(self.players)):
             if self.players[i].status == True:
                 self.players[i].status = False
@@ -149,6 +155,7 @@ class Game:
 
 
     def show_board(self):
+    #show game board
         print('--------------------')
         for row in range(self.demension):
             a = '|'
@@ -159,6 +166,7 @@ class Game:
 
 
     def start_game(self):
+    #start game in commandline
         if len(self.players) != self.player_count:
             return print('not enough players')
         flag = 0
@@ -174,16 +182,3 @@ class Game:
             if flag == self.player_count:
                 flag = 0
         return print('Tie!')
-
-        
-    def start_game_gui(self):
-        import tkinter as tk
-
-        window = tk.Tk()
-        for i in range(self.demension):
-            for j in range(self.demension):
-                frame = tk.Frame(master=window, relief = tk.RAISED, borderwidth=5)
-                frame.grid(row=i, column=j)
-                label = tk.Label(master=frame, text=f'{self.elements[i][j]}')
-                label.pack()
-        window.mainloop()
