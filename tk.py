@@ -9,6 +9,12 @@ def add_players(game):
         game.add_player(player)
 
 
+def lock_all_buttons(buttons):
+    for row in buttons:
+        for button in row:
+            button.configure(state='disabled')
+
+
 def make_and_get_object(root, object):
 #make label and entry in a frame and pack it in root
     frame = tk.Frame(master=root)
@@ -22,15 +28,14 @@ def make_and_get_object(root, object):
 
 def clicked(pos, game, buttons):
     game.elements[int(pos[0])][int(pos[1])] = check_turn(game).name
-    buttons[int(pos[0])][int(pos[1])]['text'] = game.elements[int(pos[0])][int(pos[1])]
-    print(game.elements)
+    buttons[int(pos[0])][int(pos[1])].configure(text=game.elements[int(pos[0])][int(pos[1])], state='disabled')
     if game.win_check(pos) == True:
         print(f'{game.elements[int(pos[0])][int(pos[1])]} won')
-
+        lock_all_buttons(buttons)
 
 
 def create_game_start(root, demension, win_on, player_count):
-#create and start game
+    #create and start game
     buttons = []
     game = Game(demension, win_on, player_count)
     elements = game.elements
@@ -59,7 +64,7 @@ def check_turn(game):
 
 
 def main():
-#main window
+    #main window
     root = tk.Tk()
     demension = make_and_get_object(root, 'demension')
     win_on = make_and_get_object(root, 'win on')
