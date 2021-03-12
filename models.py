@@ -71,6 +71,13 @@ class Game:
             for j in range(column):
                 a[i].append('')
         return a
+
+
+    def add_players(self):
+    #add players to game by player_count automaticly
+        for i in range(self.player_count):
+            player = Player(f'player{i+1}')
+            self.add_player(player)
         
 
 
@@ -120,6 +127,23 @@ class Game:
                 if flag == 1:
                     return True
         return False
+
+    
+    def check_turn(self):
+        for player in self.players:
+            if player.status == True:
+                return player
+
+
+    def next_turn(self):
+        for i in range(len(self.players)):
+            if self.players[i].status == True:
+                self.players[i].status = False
+                if i == len(self.players)-1:
+                    self.players[0].status = True
+                else:
+                    self.players[i+1].status = True
+                return self.players[i]
 
 
     def show_board(self):

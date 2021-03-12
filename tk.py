@@ -2,12 +2,6 @@ import tkinter as tk
 from models import Game, Player
 
 
-def add_players(game):
-#add players to game by player_count automaticly
-    for i in range(game.player_count):
-        player = Player(f'player{i+1}')
-        game.add_player(player)
-
 
 def lock_all_buttons(buttons):
     for row in buttons:
@@ -27,8 +21,9 @@ def make_and_get_object(root, object):
 
 
 def clicked(pos, game, buttons, label):
-    game.elements[int(pos[0])][int(pos[1])] = check_turn(game).name
-    label.config(text=f'{who_is_turn(game)} turn:')
+    game.elements[int(pos[0])][int(pos[1])] = game.check_turn().name
+    game.next_turn()
+    label.config(text=f'{game.check_turn().name} turn:')
     buttons[int(pos[0])][int(pos[1])].configure(text=game.elements[int(pos[0])][int(pos[1])], state='disabled')
     if game.win_check(pos) == True:
         label.config(text=f'{game.elements[int(pos[0])][int(pos[1])]} won')
@@ -40,10 +35,10 @@ def create_game_start(root, demension, win_on, player_count):
     buttons = []
     game = Game(demension, win_on, player_count)
     elements = game.elements
-    add_players(game)
+    game.add_players()
     game.players[0].status = True
     top = tk.Toplevel(root)
-    label = tk.Label(top, text=f'{who_is_turn(game)} turn:')
+    label = tk.Label(top, text=f'{game.check_turn().name} turn:')
     label.grid(row=0,column=0)
     frame = tk.Frame(top)
     for i in range(len(elements)):
@@ -55,23 +50,6 @@ def create_game_start(root, demension, win_on, player_count):
             buttons[i].append(button)
     frame.grid(row=1, column=0)
     top.mainloop()
-
-
-def who_is_turn(game):
-    for player in game.players:
-        if player.status == True:
-            return player
-
-
-def check_turn(game):
-    for i in range(len(game.players)):
-        if game.players[i].status == True:
-            game.players[i].status = False
-            if i == len(game.players)-1:
-                game.players[0].status = True
-            else:
-                game.players[i+1].status = True
-            return game.players[i]
 
 
 def main():
