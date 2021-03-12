@@ -1,4 +1,5 @@
 from models import Player, Game
+from tk import main as start_gui
 
 
 
@@ -12,7 +13,7 @@ def input_to_int(text):
 
 
 while True:
-    command = input_to_int('1-make a game\n2-show games\nenter 0 for exit\n')
+    command = input_to_int('1-make a game\n2-make a game(gui)\nenter 0 for exit\n')
     if command == 0:
         break
     elif command == 1:
@@ -41,8 +42,7 @@ while True:
             else:
                 print('Incorrect command!!!')
     elif command == 2:
-        for game in Game.objects:
-            print(game)
+        start_gui()
     else:
         print('Incorrect command!!!')
 
