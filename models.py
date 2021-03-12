@@ -27,10 +27,19 @@ class Player:
         self.name = name
         self.score = 0
         self.objects.append(self)
+        self.status = False
     
 
     def add_score(self):
         self.score += 1
+
+    
+    def disable(self):
+        self.status = False
+
+
+    def enable(self):
+        self.status = True
 
 
     def __str__(self):
@@ -60,7 +69,7 @@ class Game:
         for i in range(row):
             a.append([])
             for j in range(column):
-                a[i].append(None)
+                a[i].append('')
         return a
         
 
