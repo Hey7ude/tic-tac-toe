@@ -21,7 +21,7 @@ while True:
         player_count = input_to_int('Enter number of players:')
         game = Game(demension, win_on, player_count)
         while True:
-            command = input_to_int('1-start game\n2-add player\nenter 0 to go back\n')
+            command = input_to_int('1-start game\n2-add player\n3-add players automaticly\nenter 0 to go back\n')
             if command == 0:
                 break
             elif command == 1:
@@ -30,9 +30,14 @@ while True:
                 if winner != None:
                     winner.add_score()
             elif command == 2:
-                name = input('Enter name of player:\n')
-                player = Player(name)
-                game.add_player(player)
+                if len(game.players) == game.player_count:
+                    print(f'You can add more than {game.player_count} players in this game.')
+                else:
+                    name = input('Enter name of player:\n')
+                    player = Player(name)
+                    game.add_player(player)
+            elif command == 3:
+                game.add_players()
             else:
                 print('Incorrect command!!!')
     elif command == 2:
