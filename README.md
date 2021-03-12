@@ -19,6 +19,6 @@ For choosing your move in game you should enter row number then column number. E
 
 ## TODO
 
-- [ ] simple GUI 
+- [x] simple GUI 
 - [ ] show errors instead of crash
 - [ ] more feature for player and game classes
