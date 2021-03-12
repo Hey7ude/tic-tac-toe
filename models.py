@@ -78,6 +78,8 @@ class Game:
         for i in range(self.player_count):
             player = Player(f'player{i+1}')
             self.add_player(player)
+            if len(self.players) == self.player_count:
+                return
         
 
 
